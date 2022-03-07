@@ -1,7 +1,7 @@
 const Header = () => {
     return ( 
-        <header className="app-header">
-            <h1>Newsly</h1>
+        <header className="fw-100 bg-dark-red">
+            <h1 className="f1">Newsly</h1>
         </header>
      );
 }

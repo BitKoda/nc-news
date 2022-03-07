@@ -1,13 +1,16 @@
 
 // Components
 import Header from "./components/Header.jsx"
+import Navbar from "./components/Navbar.jsx"
+import ArticlesList from "./components/ArticlesList.jsx"
+
 
 function App() {
   return (
     <>
-    <div className="wrapper">
-      <Header />
-    </div>
+    <Header />
+    <Navbar />
+    <ArticlesList />
     </>
   );
 }
