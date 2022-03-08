@@ -22,7 +22,7 @@ const ArticlesList = () => {
     if(isLoading) return <p>Loading...</p>
     
     return (
-        <>
+        <section className="section__cards">
         {articles.map((article) =>  {
             console.log(article)
             return (
@@ -35,10 +35,11 @@ const ArticlesList = () => {
                 topic={article.topic}
                 comment_count={article.comment_count}
                 body={truncateText(article.body)}
+                votes={article.votes}
                 />
             )
         })}
-        </>
+        </section>
     );
 };
  
