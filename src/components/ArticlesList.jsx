@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import * as api from '../utils/api';
+import SingleArticle from "./SingleArticle";
+import formatDate from "../utils/formatDate";
 
 const ArticlesList = () => {
     const [articles, setArticles] = useState([]);
@@ -17,16 +19,27 @@ const ArticlesList = () => {
     
     if(isLoading) return <p>Loading...</p>
     
-    return ( 
+    return (
+        <>
         {articles.map((article) =>  {
+            console.log(article)
             return (
-            <div className="article-card" key={article.article_id}>
                 
-                    <h2>{article.title}</h2>
-            );
-        })};
-        </div>
-     );
-}
+                <SingleArticle
+                key={article.article_id}
+                article_id={article.article_id}
+                title={article.title}
+                author={article.author}
+                created_at={formatDate(article.created_at)}
+                topic={article.topic}
+                comment_count={article.comment_count}
+                body={article.body}
+                />
+               
+            )
+        })}
+        </>
+    );
+};
  
 export default ArticlesList;

@@ -1,1 +1,157 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,100;1,900&display=swap');
+
+/* Colours 
+Cosmic Latte: #FDF5DF
+Cornsilk: #F5EBCC
+Maximum Blue Green: #5EBEC4
+Rose: #F92C85
+*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Quicksand;
+}
+body, html {
+    background-color: #FDF5DF;
+}
+
+.header__container {
+    /* background-color: #5ebec4; */
+    padding: 20px;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header__h1 {
+    font-family: Montserrat;
+    font-weight: 900;
+    font-style: italic;
+    color: #f92c85;
+    text-transform: uppercase;
+    font-size: 64px;
+}
+
+.navbar {
+    background-color: #F5EBCC;
+    padding: 20px;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+ /* Dropdown Button */
+ .topics-btn {
+    background-color: #5ebec4;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    font-weight:900;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .topics-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .topics-content {
+    display: none;
+    position: absolute;
+    background-color: #FDF5DF;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .topics-content a {
+    color: #5ebec4;
+    font-weight:900;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .topics-content a:hover {
+        background-color: #F5EBCC;
+        color:#5ebec4;
+    }
+  
+  /* Show the dropdown menu on hover */
+  .topics-dropdown:hover .topics-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .topics-dropdown:hover .topics-btn {background-color: #f92c85;} 
+
+
+.content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.article__card {
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.article__card:hover {
+    box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+}
+
+.article--metadata {
+    font-size: small;
+    margin-bottom: 20px;
+
+}
+
+.topic--metadata__article {
+    font-size: small;
+    color: #f1f1f1;
+    font-weight: 900;
+    padding: 5px;
+    margin: 0 10px;
+    background-color:#5ebec4;
+    float: right;
+}
+
+.comment-count--metadata__article {
+    font-size: small;
+    color: #f1f1f1;
+    padding: 5px;
+    margin: 0 10px;
+    background-color:#f92c85;
+    float: right;
+    border-radius: 50%;
+}
+
+a {
+    color: #5ebec4;
+    text-decoration: none;
+
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    font-size: 1.2em;
+}
+
