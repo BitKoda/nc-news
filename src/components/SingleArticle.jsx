@@ -13,7 +13,7 @@ const SingleArticle = ({ article_id,
         <article className="article__card">
             <header>
             <Link to={`/articles/${article_id}`}>
-                <h2>{ title }</h2>
+                <h2 className='article__h2'>{ title }</h2>
             </Link>
             <div className="article--metadata">
                 <span>by {author} on {created_at}</span>
