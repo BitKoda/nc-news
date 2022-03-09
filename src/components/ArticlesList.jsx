@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as api from '../utils/api';
 import SingleArticle from "./SingleArticle";
 import formatDate from "../utils/formatDate";
-import truncateText from "../utils/truncateText";
+
 
 const ArticlesList = () => {
     const [articles, setArticles] = useState([]);
@@ -22,23 +22,16 @@ const ArticlesList = () => {
     if(isLoading) return <p>Loading...</p>
     
     return (
-        <>
+        <section className="section__cards">
         {articles.map((article) =>  {
-            console.log(article)
             return (
                 <SingleArticle
                 key={article.article_id}
-                article_id={article.article_id}
-                title={article.title}
-                author={article.author}
-                created_at={formatDate(article.created_at)}
-                topic={article.topic}
-                comment_count={article.comment_count}
-                body={truncateText(article.body)}
+                {...article}
                 />
             )
         })}
-        </>
+        </section>
     );
 };
  

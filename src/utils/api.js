@@ -5,10 +5,17 @@ const newslyApi = axios.create({
 })
 
 export const getArticles = () => {
-    return newslyApi.get('/articles')
-        .then((res) => {
-            console.log(res.data.articles, "<<<<<<< from api")
-            return res.data.articles;
-            
+    return newslyApi
+        .get('/articles')
+        .then(({data: {articles}}) => {
+            return articles;
         })
+}
+
+export const getArticle = (article_id) => {
+    return newslyApi
+        .get(`/articles/${article_id}`)
+        .then(({data: {article}}) => {
+            return article;
+    })
 }
