@@ -33,10 +33,6 @@ const ArticlePage = () => {
                 votes={article.votes}
                 comment_count={article.comment_count}
             />
-            <div id="article__comments">
-
-            </div>
-        
         </div>
     );
 }

@@ -19,28 +19,3 @@ export const getArticle = (article_id) => {
             return article;
     })
 }
-
-// export const deleteArticle = (article_id) => {
-//     return newslyApi.delete(`/articles/${article_id}`).then(() => {
-//         return [];
-//     })
-// }
-
-// export const addArticle = (form) => {
-//     return newslyApi
-//     .post("/articles", form)
-//     .then((res) => {
-//         return res.data.article.article_id;
-//     })
-// }
-
-// export const getTopics = () => {
-//     return newslyApi.get("/topics").then((res) => {
-//         return res.data.topics;
-//     })
-// }
-
-// export const addTopic = (form) => {
-//     return newslyApi
-//     .post("/topics", form)
-// }

@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom'
+import truncateText from "../utils/truncateText";
 
-const SingleArticle = ({ 
-    article_id, 
-    title, 
-    author, 
-    created_at, 
-    topic, 
-    comment_count,
-    body,
-    votes
-}) => {
+const SingleArticle = ({ article_id, body, title, author, created_at, topic, comment_count }) => {
     return (
             <article className="article__card">
                 <header>
@@ -23,7 +15,7 @@ const SingleArticle = ({
                 </div>
                 </header>
                 <p>
-                    {body}
+                    {truncateText(body)}
                 </p>
             </article>
 
