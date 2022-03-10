@@ -1,25 +1,33 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import * as api from '../utils/api';
 import SingleArticle from "./SingleArticle";
-import formatDate from "../utils/formatDate";
+import ErrorPage from "./ErrorPage";
 
 
 const ArticlesList = () => {
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    //const [error, setError] = useState(null);
-
+    const [error, setError] = useState(null);
+    const { topic } = useParams();
+   
     useEffect(() => {
         setIsLoading(true)
-        api.getArticles().
-            then((articles) => {
+        api
+            .getArticles(topic)
+            .then((articles) => {
                 setArticles(articles);
                 setIsLoading(false);
-                //setError(null);
+                setError(null)
+            })
+            .catch(({ response: {data: { msg }, status }}) => {
+                setError({ status, msg });
+                setIsLoading(false);                                    
             });
-    }, []);
+    }, [topic]);
 
     if(isLoading) return <p>Loading...</p>
+    if (error) return <ErrorPage />
     
     return (
         <section className="section__cards">
