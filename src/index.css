@@ -134,17 +134,21 @@ body, html {
 .article--metadata {
     font-size: small;
     margin-bottom: 20px;
-
 }
 
-/* #article__fullcard {
+#section_full-article {
     grid-template-columns: 1fr;
     background-color:#FDF5DF;
     border-radius: 8px;
     padding: 20px;
 }
 
-#article__fullcard:hover {
+.article__full-article {
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+/* #section__full-article:hover {
     box-shadow:
     2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
     6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),

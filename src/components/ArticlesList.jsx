@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as api from '../utils/api';
-import SingleArticle from "./SingleArticle";
+import ArticlesListCard from "./ArticlesListCard";
 import ErrorPage from "./ErrorPage";
-
 
 const ArticlesList = () => {
     const [articles, setArticles] = useState([]);
@@ -33,7 +32,7 @@ const ArticlesList = () => {
         <section className="section__cards">
         {articles.map((article) =>  {
             return (
-                <SingleArticle
+                <ArticlesListCard
                 key={article.article_id}
                 {...article}
                 />
