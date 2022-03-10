@@ -1,7 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as api from "../utils/api.js";
-import SingleArticle from '../components/SingleArticle';
 import formatDate from "../utils/formatDate.js";
 import ErrorPage from "../components/ErrorPage.jsx";
 
@@ -28,18 +27,23 @@ const ArticlePage = () => {
     if(isLoading) return <p>Loading....</p>
 
     return (
-        <div id="article__fullcard">
-            <SingleArticle
-                article_id={article.article_id} 
-                title={article.title}
-                topic={article.topic}
-                author={article.author}
-                body={article.body}
-                created_at={formatDate(article.created_at)}
-                votes={article.votes}
-                comment_count={article.comment_count}
-            />
-        </div>
+        <section id="section__full-article">
+            <article className="article__full-article">
+                <header>
+                <Link to={`/article/${article_id}`}>
+                    <h2 className='article__h2'>{ article.title }</h2>
+                </Link>
+                <div className="article--metadata">
+                    <span>by {article.author} on {formatDate(article.created_at)}</span>
+                    <span className='topic--metadata__article'>{article.topic}</span>
+                    <span className='comment-count--metadata__article'>{article.comment_count}</span>
+                </div>
+                </header>
+                <p>
+                    {article.body}
+                </p>
+            </article>
+        </section>
     );
 }
  
