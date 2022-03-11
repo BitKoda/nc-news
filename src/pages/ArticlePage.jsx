@@ -41,7 +41,9 @@ const ArticlePage = () => {
                 <div className="article--metadata">
                     <span className='author-metadata__article'>by { article.author } on {formatDate(article.created_at)}</span>
                     <span className='topic--metadata__article'>{ article.topic }</span>
-                    <span className='comment-count--metadata__article'>{ article.comment_count } comments</span>
+                    <span className='comment-count--metadata__article'> 
+                        <a href='#section__comments'>{article.comment_count} comments</a>
+                    </span>
                 </div>
             </header>
                 <p>
