@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import * as api from "../utils/api.js";
 import formatDate from "../utils/formatDate.js";
 import ErrorPage from "../components/ErrorPage.jsx";
+import AddCommentForm from "../components/AddCommentForm" 
 
 const ArticlePage = () => {
     const {article_id} = useParams();
@@ -27,6 +28,7 @@ const ArticlePage = () => {
     if(isLoading) return <p>Loading....</p>
 
     return (
+        <>
         <section id="section__full-article">
             <article className="article__full-article">
             <header className='article__card-header'>
@@ -42,6 +44,8 @@ const ArticlePage = () => {
                 </p>
             </article>
         </section>
+       <AddCommentForm />
+       </>
     );
 }
  

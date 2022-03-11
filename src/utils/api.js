@@ -30,3 +30,16 @@ export const getTopics = () => {
         return topics;
     })
 }
+
+export const postComment = (article_id, comment) => {
+    return newslyApi
+    .post(`/articles/${article_id}/comments`, {
+        comment
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
