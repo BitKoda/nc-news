@@ -31,6 +31,17 @@ export const getTopics = () => {
     })
 }
 
+export const postComment = ({article_id, author, body}) => {
+    return newslyApi
+    .post(`/articles/${article_id}/comments`, {
+        article_id: article_id,
+        author: author,
+        body: body 
+      })
+      .then(function (response) {
+        return response;
+      })
+
 export const getArticleComments = (article_id) => {
     return newslyApi
     .get(`/articles/${article_id}/comments`)

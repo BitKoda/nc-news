@@ -9,6 +9,8 @@ import CommentsList from "../components/CommentsList.jsx";
 /// Utilities
 import * as api from "../utils/api.js";
 import formatDate from "../utils/formatDate.js";
+import AddCommentForm from "../components/AddCommentForm" 
+
 
 const ArticlePage = () => {
     const {article_id} = useParams();
@@ -51,6 +53,7 @@ const ArticlePage = () => {
                 </p>
             </article>
         </section>
+        <AddCommentForm />
         <CommentsList />
         </>
     );
