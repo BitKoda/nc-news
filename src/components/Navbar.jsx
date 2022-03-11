@@ -31,18 +31,14 @@ const Navbar = () => {
              <div className="topics-dropdown">
                 <button className="topics-btn">Topics</button>
                 <div className="topics-content">
-                <Link to='/'>all</Link>
+                    <Link to='/' key={'all'}>all</Link>
                     {topics.map((topic) =>  {
                         return (
-                            <>
-                            
                             <Link to={`articles/${topic.slug}`} key={topic.slug}>
                             {topic.slug}
                             </Link>
-                            </>
-            )
-        })}
-                    
+                        )
+                    })}  
                 </div>
             </div> 
         </nav>
