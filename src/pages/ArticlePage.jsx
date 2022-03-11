@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as api from "../utils/api.js";
 import formatDate from "../utils/formatDate.js";
@@ -29,16 +29,14 @@ const ArticlePage = () => {
     return (
         <section id="section__full-article">
             <article className="article__full-article">
-                <header>
-                <Link to={`/article/${article_id}`}>
-                    <h2 className='article__h2'>{ article.title }</h2>
-                </Link>
+            <header className='article__card-header'>
+                <h2 className='article__h2'>{ article.title }</h2>
                 <div className="article--metadata">
-                    <span>by {article.author} on {formatDate(article.created_at)}</span>
-                    <span className='topic--metadata__article'>{article.topic}</span>
-                    <span className='comment-count--metadata__article'>{article.comment_count}</span>
+                    <span className='author-metadata__article'>by { article.author } on {formatDate(article.created_at)}</span>
+                    <span className='topic--metadata__article'>{ article.topic }</span>
+                    <span className='comment-count--metadata__article'>{ article.comment_count } comments</span>
                 </div>
-                </header>
+            </header>
                 <p>
                     {article.body}
                 </p>
