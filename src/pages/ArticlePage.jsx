@@ -15,6 +15,7 @@ import AddCommentForm from "../components/AddCommentForm"
 const ArticlePage = () => {
     const {article_id} = useParams();
     const [article, setArticle] = useState({});
+    const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -29,6 +30,17 @@ const ArticlePage = () => {
             setError(true)
             setIsLoading(false)            
         })
+    }, [article_id]);
+
+    useEffect(() => {
+        setIsLoading(true)
+        api
+        .getArticleComments(article_id)
+        .then((comments) => {
+            setComments(comments);
+            setIsLoading(false);
+            setError(null);
+        });
     }, [article_id]);
 
     if (error) return <ErrorPage />

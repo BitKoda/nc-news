@@ -41,6 +41,7 @@ export const postComment = ({article_id, author, body}) => {
       .then(function (response) {
         return response;
       })
+}
 
 export const getArticleComments = (article_id) => {
     return newslyApi

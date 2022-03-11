@@ -12,7 +12,7 @@ const AddCommentForm = () => {
     const { article_id } = useParams();
     const [author, setAuthor] = useState('');
     const [body, setBody] = useState('');
-    //const [comments, setComments] = useState([])
+    const [comment, setComment] = useState([])
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +25,7 @@ const AddCommentForm = () => {
         .postComment(comment)
         .then((response) => {
             console.log(response.data, "<<<<Submitted form")
-            //setComment(comment);
+            setComment(comment);
             
             setIsLoading(false);
             setError(null)
@@ -41,12 +41,12 @@ const AddCommentForm = () => {
 
     return ( 
         <div className="form--add--comment">
-            <h3 className="form__heading">
+            <legend>
                 Something to say?
-            </h3>
+            </legend>
             <fieldset>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="">
+                    <label htmlFor="" className="label__username">
                         Username
                     </label>
                     <input 
@@ -55,10 +55,11 @@ const AddCommentForm = () => {
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
                     />
-                    <label htmlFor="">
+                    <label htmlFor="" className="label__comment--body">
                         Comment
                     </label>
-                    <textarea 
+                    <textarea
+                        className="textarea__comment--body"
                         required
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
@@ -67,7 +68,7 @@ const AddCommentForm = () => {
                         cols="120" 
                         rows="4">                     
                     </textarea>
-                    <button>Comment</button>
+                    <button className="button__comment-submit">Submit Comment</button>
                 </form>
             </fieldset>
         </div>
