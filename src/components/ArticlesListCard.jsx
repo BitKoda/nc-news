@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import truncateText from "../utils/truncateText";
 import formatDate from "../utils/formatDate";
 
-const SingleArticle = ({ article_id, body, title, author, created_at, topic, comment_count }) => {
+const ArticlesListCard = ({ article_id, body, title, author, created_at, topic, comment_count }) => {
     return (
         <article className="article__card">
             <header className='article__card-header'>
@@ -22,4 +22,4 @@ const SingleArticle = ({ article_id, body, title, author, created_at, topic, com
     );
 }
  
-export default SingleArticle;
+export default ArticlesListCard;

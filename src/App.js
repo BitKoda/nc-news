@@ -18,6 +18,7 @@ function App() {
         <Route path="/" element={<ArticlesList />} />
         <Route path="/articles" element={<ArticlesList />} />
         <Route path="/article/:article_id" element={<ArticlePage />} />
+        <Route path="/article/:article_id/comments" element={<ArticlePage />} />
         <Route path="/articles/:topic" element={<ArticlesList />} />
 
         <Route path={"*"} element={<ErrorPage />}></Route>

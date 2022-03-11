@@ -30,3 +30,11 @@ export const getTopics = () => {
         return topics;
     })
 }
+
+export const getArticleComments = (article_id) => {
+    return newslyApi
+    .get(`/articles/${article_id}/comments`)
+    .then(({data: { comments }}) => {
+        return comments;
+    })
+}
