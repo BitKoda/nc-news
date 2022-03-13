@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const newslyApi = axios.create({
+const ncdcApi = axios.create({
     baseURL: 'https://newsly-nc.herokuapp.com/api/'
 })
 
 export const getArticles = (topic) => {
-    return newslyApi
+    return ncdcApi
         .get('/articles', {
         params: {
             topic
@@ -16,7 +16,7 @@ export const getArticles = (topic) => {
 }
 
 export const getArticle = (article_id) => {
-    return newslyApi
+    return ncdcApi
         .get(`/articles/${article_id}`)
         .then(({data: {article}}) => {
             return article;
@@ -24,7 +24,7 @@ export const getArticle = (article_id) => {
 }
 
 export const getTopics = () => {
-    return newslyApi
+    return ncdcApi
     .get('/topics')
     .then(({data: { topics }}) => {
         return topics;
@@ -32,7 +32,7 @@ export const getTopics = () => {
 }
 
 export const postComment = ({article_id, author, body}) => {
-    return newslyApi
+    return ncdcApi
     .post(`/articles/${article_id}/comments`, {
         article_id: article_id,
         author: author,
@@ -44,9 +44,17 @@ export const postComment = ({article_id, author, body}) => {
 }
 
 export const getArticleComments = (article_id) => {
-    return newslyApi
+    return ncdcApi
     .get(`/articles/${article_id}/comments`)
     .then(({data: { comments }}) => {
         return comments;
+    })
+}
+
+export const deleteComment = (comment_id) => {
+    return ncdcApi
+    .delete(`/comments/${comment_id}`)
+    .then((res) => {
+        return res;
     })
 }

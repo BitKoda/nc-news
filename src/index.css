@@ -194,7 +194,6 @@ a .article__h2 {
 .comment-count--metadata__article {
     font-weight: 500;
     font-size: small;
-    color: #5ebec4;
     margin-left: 20px;
 }
 
@@ -315,6 +314,23 @@ input[type=text]:focus {
     cursor: pointer;
     font-size: medium;
     font-weight: 900;
+}
+
+span .button-delete-comment {
+    margin-left: 2rem;
+}
+
+.button-delete-comment {
+    background-color: #F8D7DA;
+    border: 1px solid #842029;
+    color: #842029;
+    padding: 4px 8px;
+    text-decoration: none;
+    margin: 0;
+    cursor: pointer;
+    font-size: small;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 .alert {

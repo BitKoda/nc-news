@@ -41,6 +41,7 @@ const ArticlePage = () => {
 
     useEffect(() => {
         setIsLoading(true);
+        
         api
         .getArticle(article_id).then((article) => {
             setArticle(article)
