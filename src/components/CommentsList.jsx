@@ -14,6 +14,25 @@ const CommentsList = () => {
     const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [deleteAlert, setDeleteAlert] = useState(false)
+
+    const deleteComment = (comment_id) => {
+        api.deleteComment(comment_id)
+            .then(() => {
+                setComments(updatedComments);
+                setDeleteAlert(true)
+            })
+            .catch(() => {
+                setError(true)
+                setIsLoading(false)            
+            })
+        
+        const updatedComments = comments.filter((comment) => {
+            if (comment.comment_id !== comment_id) {
+                return {...comments}
+            }
+        })
+    }
 
     useEffect(() => {
         setIsLoading(true)
@@ -32,11 +51,17 @@ const CommentsList = () => {
     return (
         <section className="section__comments">
             <h3>Comments</h3>
+            {deleteAlert && 
+            <div className="alert alert-success">
+                <strong>Success! </strong>Comment deleted
+            </div>
+        }
         {comments.map((comment) =>  {
             return (
                 <CommentCard
                 key={comment.comment_id}
                 {...comment}
+                onDelete={deleteComment}
                 />
             )
         })}
