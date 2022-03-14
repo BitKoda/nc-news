@@ -17,21 +17,17 @@ const CommentsList = () => {
     const [deleteAlert, setDeleteAlert] = useState(false)
 
     const deleteComment = (comment_id) => {
+        const remainingComments = comments.filter(comment => comment.comment_id !== comment_id);
+        
         api.deleteComment(comment_id)
             .then(() => {
-                setComments(updatedComments);
+                setComments(remainingComments);
                 setDeleteAlert(true)
             })
             .catch(() => {
                 setError(true)
                 setIsLoading(false)            
             })
-        
-        const updatedComments = comments.filter((comment) => {
-            if (comment.comment_id !== comment_id) {
-                return {...comments}
-            }
-        })
     }
 
     useEffect(() => {
