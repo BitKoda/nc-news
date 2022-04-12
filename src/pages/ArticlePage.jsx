@@ -10,17 +10,42 @@ import CommentsList from "../components/CommentsList.jsx";
 import * as api from "../utils/api.js";
 import formatDate from "../utils/formatDate.js";
 
-const ArticlePage = () => {
+const ArticlePage = ({user}) => {
     const {article_id} = useParams();
     const [article, setArticle] = useState({});
     const [formData, setFormData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
     const [postConfirmed, setPostConfirmed] = useState(false);
-
+    const [votes, setVotes] = useState(0);
+    // const [user, setUser] = useState(null);
+    //const [visible, setVisible] = useState(false);
+    
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value, article_id });
+
+        setFormData({ ...formData, 
+            [e.target.name]: e.target.value,
+            author: user,
+            article_id 
+        });
     };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        api
+        .patchArticle(article, votes)
+        .then(() => {
+            setIsLoading(false);
+            setError(null);
+            setArticle(article);
+        })
+        .catch(({ response: {data: { msg }, status }}) => {
+            setError({ status, msg });
+            setIsLoading(false);                                    
+        });
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,31 +69,37 @@ const ArticlePage = () => {
         
         api
         .getArticle(article_id).then((article) => {
-            setArticle(article)
-            setIsLoading(false)
+            setArticle(article); 
+            // setUser(user)
+            setIsLoading(false);
+            setPostConfirmed(false);
         })
         .catch(() => {
             setError(true)
             setIsLoading(false)            
         })
-    }, [article_id]);
+    },[article_id]);
 
     if (error) return <ErrorPage />
     if (isLoading) return <p>Loading....</p>
     
     return (
         <>
-        {postConfirmed && 
+        <section className={postConfirmed ? 'fadeIn' : 'fadeOut'}>
             <div className="alert alert-success">
-                <strong>Success! </strong>Thanks for your comment!
+                <strong>Success! </strong>Thanks for your comment, {user}!
             </div>
-        }
+        </section>
+        
         <section id="section__full-article">
             <article className="article__full-article">
                 <header className='article__card-header'>
                     <h2 className='article__h2'>{ article.title }</h2>
                     <div className="article--metadata">
-                        <span className='author-metadata__article'>by { article.author } on {formatDate(article.created_at)}</span>
+                        <span className='author-metadata__article'>
+                        by { article.author } 
+                        on { formatDate(article.created_at) }
+                        </span>
                         <span className='topic--metadata__article'>{ article.topic }</span>
                         <span className='comment-count--metadata__article'> 
                             <a href='#section__comments'>{article.comment_count} comments</a>
@@ -78,15 +109,35 @@ const ArticlePage = () => {
                 <p>
                     {article.body}
                 </p>
+                <div className="vote-count--metadata__article">
+                    <form onSubmit={handleUpdate}>
+                        <button className="button__upVote" 
+                            onClick={() => setVotes((prevVote) => {
+                                return prevVote + 1;
+                                })
+                            }
+                        >
+                        👍🏻
+                        </button>
+                        <span className="vote--counter">{article.votes + votes}</span>
+                        <button className="button__downVote" onClick={() => setVotes((prevVote) => {
+                                return prevVote - 1;
+                                })
+                            }
+                        >
+                        👎🏻
+                        </button>
+                    </form>
+                </div>
             </article>
         </section>
         <section className="form--add--comment">
-            <legend>
-                Something to say?
-            </legend>
+            {/* <legend>
+                Comments
+            </legend> */}
             <fieldset>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="author" className="label__username">
+                    {/* <label htmlFor="author" className="label__username">
                         Author
                     </label>
                     <input 
@@ -95,9 +146,9 @@ const ArticlePage = () => {
                         placeholder="Enter your username"
                         onChange={handleChange}
                         required
-                    />
+                    /> */}
                     <label htmlFor="body" className="label__comment--body">
-                        Comment
+                        Something to say?
                     </label>
                     <textarea
                         className="textarea__comment--body"

@@ -6,12 +6,16 @@ import ErrorPage from "./ErrorPage";
 
 const ArticlesList = () => {
     const [articles, setArticles] = useState([]);
+    
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const { topic } = useParams();
+
+    // let randomUser = Math.random() * 1;
    
     useEffect(() => {
         setIsLoading(true)
+
         api
             .getArticles(topic)
             .then((articles) => {
