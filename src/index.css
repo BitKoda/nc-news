@@ -27,19 +27,26 @@ body, html {
 .header__container {
     padding: 20px;
     display: flex;
+    flex-direction: row;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.header__h1 {
+.header__container .user-login {
+    display:flex;
+    justify-content: right;
+    align-items: center;
+    flex:1;
+}
+
+.logo h1 {
     font-family: 'squeeler';
-    
     color: #f92c85;
     text-transform: uppercase;
     font-size: 64px;
 }
 
-.header__h1 .slogan {
+.logo p {
     font-family: Montserrat;
     font-weight: 300;
     font-style: italic;
@@ -157,13 +164,12 @@ a .article__h2 {
 
 .article__full-article {
     padding: 20px;
-    margin-bottom: 40px;
 }
 
 .article__card-header {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .article--metadata {
@@ -195,6 +201,33 @@ a .article__h2 {
     font-weight: 500;
     font-size: small;
     margin-left: 20px;
+}
+
+.vote-count--metadata__article {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: larger;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.button__upVote, .button__downVote {
+    background-color: #f92c85;
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: medium;
+    border-radius: 50%;
+}
+
+.vote--counter {
+    margin-top: 10px;
+    padding: 0 10px;
+
 }
 
 .section__comments {
@@ -358,5 +391,17 @@ a:hover {
 p {
     font-size: 1.3rem;
     line-height: 1.7rem;;
+}
+
+/* flash messages */
+.fadeIn {
+    opacity: 1;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+}
+
+.fadeOut {
+    opacity: 0;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+    display: none;
 }
 

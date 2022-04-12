@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const ncdcApi = axios.create({
-    baseURL: 'https://newsly-nc.herokuapp.com/api/'
+    baseURL: 'https://ncdc-backend.herokuapp.com/api'
 })
 
 export const getArticles = (topic) => {
@@ -15,12 +15,30 @@ export const getArticles = (topic) => {
         })
 }
 
+export const getUsers = () => {
+    return ncdcApi
+        .get('/users')
+        .then(({data: {users}}) => {
+            return users;
+        })
+}
+
 export const getArticle = (article_id) => {
     return ncdcApi
         .get(`/articles/${article_id}`)
         .then(({data: {article}}) => {
             return article;
     })
+}
+
+export const patchArticle = (article, vote) => {
+    return ncdcApi
+        .patch(`/articles/${article.article_id}`, {
+            inc_votes: vote
+        })
+        .then(function (response) {
+             console.log(response.data);
+        })
 }
 
 export const getTopics = () => {
