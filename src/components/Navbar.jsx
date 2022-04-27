@@ -1,48 +1,89 @@
-import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import * as api from '../utils/api';
-import ErrorPage from "./ErrorPage";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 
-const Navbar = () => {
-    const [topics, setTopics] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        setIsLoading(true)
-        api
-            .getTopics()
-            .then((topics) => {
-                setTopics(topics);
-                setIsLoading(false);
-                setError(null)
-            })
-            .catch(({ response: {data: { msg }, status }}) => {
-                setError({ status, msg });
-                setIsLoading(false);                                    
-            });
-    }, []);
+const Navbar = ({ slugs }) => {
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
 
-    if(isLoading) return <p>Loading...</p>
-    if (error) return <ErrorPage />
 
-    return ( 
-        <nav className="navbar">
-             <div className="topics-dropdown">
-                <button className="topics-btn">Topics</button>
-                <div className="topics-content">
-                    <Link to='/' key={'all'}>all</Link>
-                    {topics.map((topic) =>  {
-                        return (
-                            <Link to={`articles/${topic.slug}`} key={topic.slug}>
-                            {topic.slug}
-                            </Link>
-                        )
-                    })}  
-                </div>
-            </div> 
-        </nav>
-     );
-}
+  const getLocation = (location) => {
+    if (location.pathname === '/' || location.pathname === '/articles') {
+      return "?"
+    }
+  }
  
+  console.log(location.pathname, "<<<--- path");
+
+  console.log(location.search, "<<<--- search");
+
+  return (
+    <>
+      <nav className='navbar'>
+        <div className='topics-dropdown'>
+          <button className='topics-btn'>Topics</button>
+          <div className='topics-content'>
+            <Link to='/articles' key={"all"}>
+              all
+            </Link>
+            {slugs.map((slug) => {
+              return (
+                <Link
+                  to={`articles?topic=${slug}`}
+                  key={slug}
+                  // onClick={() => setSearchParams({ topic: { slug } })}
+                >
+                  {slug}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+        <div className='topics-dropdown'>
+          <button className='topics-btn'>Sort</button>
+          <div className='topics-content'>
+            {location.search !== "" ? (
+              <Link
+                to={`${location.pathname}${location.search}&sort_by=title&order=ASC`}
+                // onClick={() => setSearchParams({ sort_by: "title" })}
+              >
+                Title (A-Z)
+              </Link>
+            ) : (
+              <Link
+                to={`${location.pathname}?sort_by=title&order=ASC`}
+                // onClick={() => setSearchParams({ sort_by: "title" })}
+              >
+                Title (A-Z)
+              </Link>
+            )}
+            {location.search !== "" ? (
+              <Link
+                to={`${location.pathname}${location.search}&sort_by=title&order=DESC`}
+                // onClick={() => setSearchParams({ sort_by: "title" })}
+              >
+                Title (Z-A)
+              </Link>
+            ) : (
+              <Link
+                to={`${location.pathname}?sort_by=title&order=DESC`}
+                // onClick={() => setSearchParams({ sort_by: "title" })}
+              >
+                Title (Z-A)
+              </Link>
+            )}
+            {/* <Link
+              to={`${location.pathname}${location.search}`}
+              // onClick={() =>
+              //   setSearchParams({ sort_by: "title", order: "DESC" })
+              // }
+            >
+              Title (Z-A)
+            </Link> */}
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
+
 export default Navbar;

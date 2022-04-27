@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import * as api from '../utils/api';
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import ArticlesListCard from "./ArticlesListCard";
 import ErrorPage from "./ErrorPage";
+import * as api from "../utils/api"
 
 const ArticlesList = () => {
-    const [articles, setArticles] = useState([]);
-    
+    //console.log(articles, "<<< ARTICLES LIST")
+    const [articles, setArticles] = useState([]);   
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { topic } = useParams();
+    
+    const [searchParams, setSearchParams] = useSearchParams();
+    const params = Object.fromEntries([...searchParams]);
+    // console.log('Mounted: ', params)
 
-    // let randomUser = Math.random() * 1;
-   
     useEffect(() => {
         setIsLoading(true)
-
+        const currentParams = Object.fromEntries([...searchParams]);
+        // console.log('useEffect', currentParams)
         api
-            .getArticles(topic)
+            .getArticles(currentParams)
             .then((articles) => {
                 setArticles(articles);
                 setIsLoading(false);
@@ -27,7 +29,7 @@ const ArticlesList = () => {
                 setError({ status, msg });
                 setIsLoading(false);                                    
             });
-    }, [topic]);
+    }, [searchParams]);
 
     if(isLoading) return <p>Loading...</p>
     if (error) return <ErrorPage />
