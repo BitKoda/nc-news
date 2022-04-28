@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ArticlesListCard from "./ArticlesListCard";
+import Footer from "./Footer";
 import ErrorPage from "./ErrorPage";
 import * as api from "../utils/api"
 
@@ -35,16 +36,15 @@ const ArticlesList = () => {
     if (error) return <ErrorPage />
     
     return (
-        <section className="section__cards">
-        {articles.map((article) =>  {
-            return (
-                <ArticlesListCard
-                key={article.article_id}
-                {...article}
-                />
-            )
-        })}
-        </section>
+        <><section className="section__cards">
+            {articles.map((article) => {
+                return (
+                    <ArticlesListCard
+                        key={article.article_id}
+                        {...article} />
+                );
+            })}
+        </section><Footer /></>
     );
 };
  

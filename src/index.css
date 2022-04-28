@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@font-face {
-  font-family: "squealer";
-  src: local("squealer"), url(./fonts/squealer.ttf) format("truetype");
-}
 
 @media (min-width: 600px) {
   .section__cards {
@@ -20,6 +16,7 @@ Linen: #FFEEE2
 */
 
 * {
+  list-style: none;
   margin: 0;
   padding: 0;
   font-family: Quicksand;
@@ -29,31 +26,41 @@ body,
 html {
   scroll-behavior: smooth;
   background-color: #fdf5df;
+  color: #444;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.wrapper {
+#container {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 350px 350px;
-  grid-template-rows: 150px;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, minmax(50px, auto));
   grid-template-areas:
     "logo user"
     "navbar navbar"
     "content content"
     "footer  footer";
-  color: #444;
+  max-width: 960px;
+  margin: 0 auto;  
+}
+
+.logo {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 0.5fr 1.5fr;
+  grid-area: logo;
+  padding: 20px;
+  color: #f92c85;
   justify-items: center;
 }
 
-.header__container {
-  grid-area: logo;
-  padding: 20px;
+.logo, .title {
+  font-family: Montserrat;
+  font-weight: 900;
+  font-style: italic;
+  color: #f92c85;
+  text-transform: uppercase;
+  font-size: 2rem;
+  align-items: center;
 }
 
 .user-login {
@@ -61,9 +68,7 @@ html {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* border: 2px solid #f92c85; */
-  /* border-radius: 10px; */
-  margin-top: 20px;
+  justify-content: right;
 }
 
 .user-login img {
@@ -80,28 +85,18 @@ html {
   margin-left: 5px;
 }
 
-.logo h1 {
-  font-family: "squeeler";
-  color: #f92c85;
-  text-transform: uppercase;
-  font-size: 64px;
-}
 
-.logo p {
-  font-family: Montserrat;
-  font-weight: 300;
-  font-style: italic;
-  color: #333;
-  text-transform: uppercase;
-  font-size: 12px;
-  text-align: center;
-}
+
+/* nav {
+  background-color: #842029;
+} */
 
 .navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-area: navbar;
-  grid-gap: 1rem;
-  max-width: 700px;
-  margin: 10px 0px;
+  background-color: #F5EBCC;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 /* Dropdown Button */
@@ -158,8 +153,6 @@ html {
 
 .section__cards {
   grid-area: content;
-  grid-gap: 1rem;
-  max-width: 700px;
   margin: 10px 0px;
 }
 
@@ -193,17 +186,20 @@ a .article__h2:hover {
   color: #5ebec4;
 }
 
-#section__full-article {
-  grid-area: content;
-  background-color: #fdf5df;
-  border-bottom: 2px solid #f5ebcc;
+#article {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; */
+  grid-area: content;  
 }
 
 .article__full-article {
+  grid-area: content;
+  border-bottom: 2px solid #f5ebcc;
   padding: 20px;
 }
 
 .article__card-header {
+  grid-area: content;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -251,13 +247,13 @@ a .article__h2:hover {
   margin-left: 5px;
 }
 
-.vote-count--metadata__article {
+.vote-count {
   display: flex;
   justify-content: center;
   width: 100%;
   font-size: larger;
-  font-weight: 500;
-  margin-top: 5px;
+  font-weight: 900;
+  margin: 20px 0px;
 }
 
 .button__upVote,
@@ -279,6 +275,7 @@ a .article__h2:hover {
 }
 
 .section__comments {
+  grid-area: content;
   background-color: #fdf5df;
   border-radius: 8px;
   padding: 20px;
@@ -414,6 +411,41 @@ span .button-delete-comment {
   font-weight: 900;
   text-transform: uppercase;
 }
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-area: footer;
+  background: #F5EBCC;
+  justify-items: center;
+  padding: 20px 0px;
+  margin-bottom: 50px;
+  color: #3a3a3a;
+  font-weight: 500;
+}
+
+footer .footer-heading {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+footer .footer-items {
+  text-transform: capitalize;
+  font-weight: 300; 
+}
+
+.footer-link  {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.footer-link a {
+  padding-left: 10px;
+  margin-top: -5px;
+}
+
 
 .alert {
   position: relative;
