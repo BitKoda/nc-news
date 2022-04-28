@@ -46,7 +46,7 @@ const CommentsList = () => {
 
     return (
         <section className="section__comments">
-            <h3>Comments</h3>
+            <h3>{} Comments</h3>
             {deleteAlert && 
             <div className="alert alert-success">
                 <strong>Success! </strong>Comment deleted
