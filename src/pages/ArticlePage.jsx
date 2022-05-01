@@ -20,8 +20,8 @@ const ArticlePage = ({ user }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [postConfirmed, setPostConfirmed] = useState(false);
-  const [votes, setVotes] = useState(0);
-
+  const [voteCount, setVoteCount] = useState(0);
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -31,16 +31,20 @@ const ArticlePage = ({ user }) => {
     });
   };
 
-  const handleUpdate = (e) => {
+  const handleVoteUpdate = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    //console.log(article_id, voteCount, "<<< Article, votes before voting");
+    setVoteCount((currCount) => currCount + 1);
+    //console.log(currVotes, "<<< Current votes >>>")
 
+    console.log(voteCount, "<<< Votes after voting");
     api
-      .patchArticle(article, votes)
+      .patchArticle(article_id, voteCount)
       .then(() => {
         setIsLoading(false);
         setError(null);
-        setArticle(article);
+        //setVoteCount(voteCount);
       })
       .catch(
         ({
@@ -58,7 +62,6 @@ const ArticlePage = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     api
       .postComment(formData)
       .then((response) => {
@@ -81,12 +84,10 @@ const ArticlePage = ({ user }) => {
 
   useEffect(() => {
     setIsLoading(true);
-
     api
       .getArticle(article_id)
       .then((article) => {
         setArticle(article);
-        // setUser(user)
         setIsLoading(false);
         setPostConfirmed(false);
       })
@@ -126,48 +127,30 @@ const ArticlePage = ({ user }) => {
         </article>
 
         <div className='vote-count'>
-          <form onSubmit={handleUpdate}>
-            <button
-              className='button__upVote'
-              onClick={() =>
-                setVotes((prevVote) => {
-                  return prevVote + 1;
-                })
-              }
-            >
-              <BiLike />
-            </button>
-            <span className='vote--counter'>{article.votes + votes}</span>
-            <button
-              className='button__downVote'
-              onClick={() =>
-                setVotes((prevVote) => {
-                  return prevVote - 1;
-                })
-              }
-            >
-              <BiDislike />
-            </button>
-          </form>
+          <button
+            variant='contained'
+            className='button__upVote'
+            onClick={handleVoteUpdate}
+          >
+            <BiLike />
+          </button>
+          <span className='vote--counter'>{article.votes + voteCount}</span>
+          {/* <button
+            variant='contained'
+            className='button__downVote'
+            onClick={() =>
+              setVoteCount((prevVote) => {
+                return prevVote - 1;
+              })
+            }
+          >
+            <BiDislike />
+          </button> */}
         </div>
-        
-      </main>
-      <section className='form--add--comment'>
-        {/* <legend>
-                Comments
-            </legend> */}
+        <section className='form--add--comment'>
+       
         <fieldset>
           <form onSubmit={handleSubmit}>
-            {/* <label htmlFor="author" className="label__username">
-                        Author
-                    </label>
-                    <input 
-                        type="text" 
-                        name="author"
-                        placeholder="Enter your username"
-                        onChange={handleChange}
-                        required
-                    /> */}
             <label htmlFor='body' className='label__comment--body'>
               Join the conversation
             </label>
@@ -184,7 +167,10 @@ const ArticlePage = ({ user }) => {
           </form>
         </fieldset>
       </section>
-      {/* <CommentsList /> */}
+      <CommentsList />
+      </main>
+      
+      
     </>
   );
 };
