@@ -17,10 +17,6 @@ const Navbar = ({ slugs }) => {
     }
   };
 
-  console.log(location.pathname, "<<<--- path");
-
-  console.log(location.search, "<<<--- search");
-
   return (
     <>
       <nav className='navbar'>
@@ -34,11 +30,7 @@ const Navbar = ({ slugs }) => {
             </Link>
             {slugs.map((slug) => {
               return (
-                <Link
-                  to={`articles?topic=${slug}`}
-                  key={slug}
-                  // onClick={() => setSearchParams({ topic: { slug } })}
-                >
+                <Link to={`articles?topic=${slug}`} key={slug}>
                   {slug}
                 </Link>
               );

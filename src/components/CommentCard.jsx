@@ -1,6 +1,5 @@
 /// Utilities
 import formatDate from "../utils/formatDate";
-import { TiDeleteOutline } from "react-icons/ti";
 
 const CommentCard = ({
   comment_id,
@@ -14,7 +13,7 @@ const CommentCard = ({
     <div className='article__comment' key={comment_id}>
       <div className='comment--header'>
         <span className='comment--author'>{author} </span>
-        <span className='comment--votes'>// {votes} votes // </span>
+        <span className='comment--votes'>&frasl;&frasl; {votes} votes &frasl;&frasl;</span>
         <span className='comment--date'>{formatDate(created_at)}</span>
       </div>
 

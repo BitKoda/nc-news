@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // Components
-import ArticlesListCard from "../components/ArticlesListCard.jsx";
 import ErrorPage from "../components/ErrorPage.jsx";
 import CommentsList from "../components/CommentsList.jsx";
 
@@ -21,7 +20,7 @@ const ArticlePage = ({ user }) => {
   const [error, setError] = useState(false);
   const [postConfirmed, setPostConfirmed] = useState(false);
   const [voteCount, setVoteCount] = useState(0);
-  
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -31,20 +30,40 @@ const ArticlePage = ({ user }) => {
     });
   };
 
-  const handleVoteUpdate = (e) => {
+  const handleUpVote = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    //console.log(article_id, voteCount, "<<< Article, votes before voting");
-    setVoteCount((currCount) => currCount + 1);
-    //console.log(currVotes, "<<< Current votes >>>")
-
-    console.log(voteCount, "<<< Votes after voting");
+    setVoteCount((currVote) => {
+      return currVote + 1;
+    });
     api
-      .patchArticle(article_id, voteCount)
+      .patchArticle(article_id, 1)
       .then(() => {
         setIsLoading(false);
         setError(null);
-        //setVoteCount(voteCount);
+      })
+      .catch(
+        ({
+          response: {
+            data: { msg },
+            status,
+          },
+        }) => {
+          setError({ status, msg });
+          setIsLoading(false);
+        }
+      );
+  };
+
+  const handleDownVote = (e) => {
+    e.preventDefault();
+    setVoteCount((currVote) => {
+      return currVote - 1;
+    });
+    api
+      .patchArticle(article_id, -1)
+      .then(() => {
+        setIsLoading(false);
+        setError(null);
       })
       .catch(
         ({
@@ -127,50 +146,35 @@ const ArticlePage = ({ user }) => {
         </article>
 
         <div className='vote-count'>
-          <button
-            variant='contained'
-            className='button__upVote'
-            onClick={handleVoteUpdate}
-          >
+          <button className='button__upVote' onClick={handleUpVote}>
             <BiLike />
           </button>
           <span className='vote--counter'>{article.votes + voteCount}</span>
-          {/* <button
-            variant='contained'
-            className='button__downVote'
-            onClick={() =>
-              setVoteCount((prevVote) => {
-                return prevVote - 1;
-              })
-            }
-          >
+          <button className='button__downVote' onClick={handleDownVote}>
             <BiDislike />
-          </button> */}
+          </button>
         </div>
         <section className='form--add--comment'>
-       
-        <fieldset>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor='body' className='label__comment--body'>
-              Join the conversation
-            </label>
-            <textarea
-              className='textarea__comment--body'
-              name='body'
-              placeholder='Type your thoughts here...'
-              onChange={handleChange}
-              cols='120'
-              rows='4'
-              required
-            ></textarea>
-            <button className='button__comment-submit'>Submit Comment</button>
-          </form>
-        </fieldset>
-      </section>
-      <CommentsList />
+          <fieldset>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor='body' className='label__comment--body'>
+                Join the conversation
+              </label>
+              <textarea
+                className='textarea__comment--body'
+                name='body'
+                placeholder='Type your thoughts here...'
+                onChange={handleChange}
+                cols='120'
+                rows='4'
+                required
+              ></textarea>
+              <button className='button__comment-submit'>Submit Comment</button>
+            </form>
+          </fieldset>
+        </section>
+        <CommentsList />
       </main>
-      
-      
     </>
   );
 };

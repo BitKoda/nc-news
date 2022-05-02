@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar.jsx";
 import ArticlesList from "./components/ArticlesList.jsx";
 import ArticlePage from "./pages/ArticlePage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
-import Footer from "./components/Footer.jsx";
 import * as api from "./utils/api";
 
 function App() {
@@ -64,6 +63,9 @@ function App() {
   }, [topic]);
 
   const slugs = [...new Set(topics.map((topic) => topic.slug))];
+  
+  if (error) return <ErrorPage />;
+  if (isLoading) return <p>Loading....</p>;
 
   return (
     <div id='container'>
