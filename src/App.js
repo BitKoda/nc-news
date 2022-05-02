@@ -6,7 +6,8 @@ import Header from "./components/Header.jsx";
 import Navbar from "./components/Navbar.jsx";
 import ArticlesList from "./components/ArticlesList.jsx";
 import ArticlePage from "./pages/ArticlePage.jsx";
-import ErrorPage from "./components/ErrorPage.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
+import Footer from "./components/Footer.jsx";
 import * as api from "./utils/api";
 
 function App() {
@@ -15,7 +16,6 @@ function App() {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [articles, setArticles] = useState([]);
   const { topic } = useParams();
 
   useEffect(() => {
@@ -63,46 +63,27 @@ function App() {
       );
   }, [topic]);
 
-  // useEffect(() => {
-  //     setIsLoading(true)
-  //     api
-  //         .getArticles(topic)
-  //         .then((articles) => {
-  //             setArticles(articles);
-  //             setIsLoading(false);
-  //             setError(null)
-  //         })
-  //         .catch(({ response: {data: { msg }, status }}) => {
-  //             setError({ status, msg });
-  //             setIsLoading(false);
-  //         });
-  // }, []);
-
-  const authors = [...new Set(articles.map((article) => article.author))];
-
   const slugs = [...new Set(topics.map((topic) => topic.slug))];
 
   return (
-    <div className='container'>
-      <div className='wrapper'>
-        <BrowserRouter>
-          <Header user={user} userAvatar={userAvatar} />
-          <Navbar slugs={slugs} authors={authors} />
-          <Routes>
-            <Route path='/' element={<ArticlesList />} />
-            <Route path='/articles' element={<ArticlesList />} />
-            <Route
-              path='/article/:article_id'
-              element={<ArticlePage user={user} />}
-            />
-            <Route
-              path='/article/:article_id/comments'
-              element={<ArticlePage />}
-            />
-            <Route path={"*"} element={<ErrorPage />}></Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+    <div id='container'>
+      <BrowserRouter>
+        <Header user={user} userAvatar={userAvatar} />
+        <Navbar slugs={slugs} />
+        <Routes>
+          <Route path='/' element={<ArticlesList />} />
+          <Route path='/articles' element={<ArticlesList />} />
+          <Route
+            path='/article/:article_id'
+            element={<ArticlePage user={user} />}
+          />
+          <Route
+            path='/article/:article_id/comments'
+            element={<ArticlePage />}
+          />
+          <Route path={"*"} element={<ErrorPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
