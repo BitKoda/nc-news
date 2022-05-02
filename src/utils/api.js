@@ -39,7 +39,6 @@ export const getArticle = (article_id) => {
 };
 
 export const patchArticle = (article_id, vote) => {
-  console.log(article_id, vote, "<<< --- Votes from API")
   return ncdcApi
     .patch(`/articles/${article_id}`, {
       inc_votes: vote,
