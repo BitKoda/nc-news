@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ncdcApi = axios.create({
-  baseURL: "https://ncdc-backend.herokuapp.com/api",
+  baseURL: "https://newsfly-backend.herokuapp.com/api",
 });
 
 export const getArticles = (query) => {
