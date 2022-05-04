@@ -447,18 +447,39 @@ footer .footer-items {
   margin-top: -5px;
 }
 
-
+/* flash messages */
 .alert {
   position: relative;
   padding: 1rem 1rem;
-  margin-bottom: 1rem;
+  margin-top: 10px;
   border: 1px solid transparent;
+  animation: alert 1.5s 1;
+  -webkit-animation: alert 0.5s 1;
+  animation-fill-mode: forwards;
+  animation-delay:2s;
+  -webkit-animation-delay: 1s; /* Safari and Chrome */
+  -webkit-animation-fill-mode: forwards;
+} 
+
+@keyframes alert{
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+@-webkit-keyframes alert{
+  from {opacity: 1;}
+  to {opacity: 0;}
+  display: none;
 }
 
 .alert-success {
   color: #0f5132;
   background-color: #d1e7dd;
   border-color: #0f5132;
+}
+
+.alert-disabled {
+  display: none;
 }
 
 a {
@@ -473,16 +494,4 @@ a:hover {
 p {
   font-size: 1.3rem;
   line-height: 1.7rem;
-}
-
-/* flash messages */
-.fadeIn {
-  opacity: 1;
-  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
-}
-
-.fadeOut {
-  opacity: 0;
-  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
-  display: none;
 }
