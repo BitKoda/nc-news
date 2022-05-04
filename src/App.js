@@ -63,7 +63,7 @@ function App() {
   }, [topic]);
 
   const slugs = [...new Set(topics.map((topic) => topic.slug))];
-  
+
   if (error) return <ErrorPage />;
   if (isLoading) return <p>Loading....</p>;
 

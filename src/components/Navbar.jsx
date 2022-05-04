@@ -1,21 +1,22 @@
-import { Link, useSearchParams, useLocation } from "react-router-dom";
-import {
-  FaFilter,
-  FaSortAlphaDownAlt,
-  FaSortAlphaDown,
-  FaSortAmountDownAlt,
-  FaSortAmountUpAlt,
-} from "react-icons/fa";
+import { Link, useSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { FaFilter } from "react-icons/fa";
+import { RiArrowGoBackFill } from "react-icons/ri"
 
 const Navbar = ({ slugs }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const path = "/article/"
+  const navigate = useNavigate();
 
-  const getLocation = (location) => {
-    if (location.pathname === "/" || location.pathname === "/articles") {
-      return "?";
-    }
-  };
+  if (location.pathname.includes(path)) {
+    return  (
+      <nav className='navbar'>
+        <button className='back-btn' onClick={() => navigate("/articles")}>
+            <RiArrowGoBackFill /> Back
+          </button>
+      </nav>
+      )
+  }
 
   return (
     <>
@@ -48,80 +49,48 @@ const Navbar = ({ slugs }) => {
                 Newest
               </Link>
             ) : (
-              <Link
-                to={`${location.pathname}?sort_by=created_at&order=desc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
-              >
+              <Link to={`${location.pathname}?sort_by=created_at&order=desc`}>
                 Newest
               </Link>
             )}
             {location.search !== "" ? (
               <Link
                 to={`${location.pathname}${location.search}&sort_by=created_at&order=asc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
               >
                 Oldest
               </Link>
             ) : (
-              <Link
-                to={`${location.pathname}?sort_by=created_at&order=asc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
-              >
+              <Link to={`${location.pathname}?sort_by=created_at&order=asc`}>
                 Oldest
               </Link>
             )}
-            {/* <Link
-              to={`${location.pathname}${location.search}`}
-              // onClick={() =>
-              //   setSearchParams({ sort_by: "title", order: "desc" })
-              // }
-            >
-              Title (Z-A)
-            </Link> */}
           </div>
         </div>
-        {/* <FaSortAlphaDownAlt fontSize="1.2em" /> */}
         <div className='topics-dropdown'>
           <button className='topics-btn'>Sort by Votes</button>
           <div className='topics-content'>
             {location.search !== "" ? (
               <Link
                 to={`${location.pathname}${location.search}&sort_by=votes&order=desc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
               >
                 Most
               </Link>
             ) : (
-              <Link
-                to={`${location.pathname}?sort_by=votes&order=desc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
-              >
+              <Link to={`${location.pathname}?sort_by=votes&order=desc`}>
                 Most
               </Link>
             )}
             {location.search !== "" ? (
               <Link
                 to={`${location.pathname}${location.search}&sort_by=votes&order=asc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
               >
                 Least
               </Link>
             ) : (
-              <Link
-                to={`${location.pathname}?sort_by=votes&order=asc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
-              >
+              <Link to={`${location.pathname}?sort_by=votes&order=asc`}>
                 Least
               </Link>
             )}
-            {/* <Link
-              to={`${location.pathname}${location.search}`}
-              // onClick={() =>
-              //   setSearchParams({ sort_by: "title", order: "desc" })
-              // }
-            >
-              Title (Z-A)
-            </Link> */}
           </div>
         </div>
         <div className='topics-dropdown'>
@@ -130,41 +99,25 @@ const Navbar = ({ slugs }) => {
             {location.search !== "" ? (
               <Link
                 to={`${location.pathname}${location.search}&sort_by=title&order=asc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
               >
                 Title (A-Z)
               </Link>
             ) : (
-              <Link
-                to={`${location.pathname}?sort_by=title&order=asc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
-              >
+              <Link to={`${location.pathname}?sort_by=title&order=asc`}>
                 Title (A-Z)
               </Link>
             )}
             {location.search !== "" ? (
               <Link
                 to={`${location.pathname}${location.search}&sort_by=title&order=desc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
               >
                 Title (Z-A)
               </Link>
             ) : (
-              <Link
-                to={`${location.pathname}?sort_by=title&order=desc`}
-                // onClick={() => setSearchParams({ sort_by: "title" })}
-              >
+              <Link to={`${location.pathname}?sort_by=title&order=desc`}>
                 Title (Z-A)
               </Link>
             )}
-            {/* <Link
-              to={`${location.pathname}${location.search}`}
-              // onClick={() =>
-              //   setSearchParams({ sort_by: "title", order: "desc" })
-              // }
-            >
-              Title (Z-A)
-            </Link> */}
           </div>
         </div>
       </nav>

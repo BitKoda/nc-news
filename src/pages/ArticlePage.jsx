@@ -1,6 +1,6 @@
 // React & React Router
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 // Components
 import ErrorPage from "../components/ErrorPage.jsx";
@@ -10,7 +10,6 @@ import CommentsList from "../components/CommentsList.jsx";
 import { BiDislike, BiLike } from "react-icons/bi";
 import * as api from "../utils/api.js";
 import formatDate from "../utils/formatDate.js";
-// import VoteCounter from "../components/VoteCounter.jsx";
 
 const ArticlePage = ({ user }) => {
   const { article_id } = useParams();
@@ -122,19 +121,30 @@ const ArticlePage = ({ user }) => {
   return (
     <main id='article'>
       <article className='article__full-article'>
-        <div className={postConfirmed ? 'alert alert-success' : 'alert-disabled'}>
+        <div
+          className={postConfirmed ? "alert alert-success" : "alert-disabled"}
+        >
           <strong>Success! </strong>Thanks for your comment, {user}!
         </div>
         <header className='article__card-header'>
           <h2 className='article__h2'>{article.title}</h2>
           <div className='article--metadata'>
-            <span className='author-metadata__article'>
-              by {article.author}
-              on {formatDate(article.created_at)}
+            <span className='article--metadata-author'>
+              by {article.author}</span> &frasl;&frasl;
+            <span className="article--metadata-date">
+              {formatDate(article.created_at)}
             </span>
-            <span className='topic--metadata__article'>{article.topic}</span>
-            <span className='comment-count--metadata__article'>
+            &frasl;&frasl;
+            <Link to={`/articles/?topic=${article.topic}`}>
+              <span className='article--metadata-topic'>{article.topic}</span>
+            </Link>
+            &frasl;&frasl;
+            <span className='article--metadata-comments'>
               {article.comment_count} comments
+            </span>
+            &frasl;&frasl;
+            <span className="article--metadata-comments">
+              {article.votes + voteCount} votes
             </span>
           </div>
         </header>
