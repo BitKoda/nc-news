@@ -14,8 +14,10 @@ const CommentCard = ({
     <div className='article__comment' key={comment_id}>
       <div className='comment--header'>
         <span className='comment--author'>{author} </span>
-        <span className='comment--votes'>&frasl;&frasl; {votes} votes &frasl;&frasl;</span>
+        &frasl;&frasl;
         <span className='comment--date'>{formatDate(created_at)}</span>
+        &frasl;&frasl;
+        <span className='comment--votes'>{votes} votes</span>
       </div>
 
       <div className='comment--body'>
