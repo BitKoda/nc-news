@@ -120,62 +120,57 @@ const ArticlePage = ({ user }) => {
   if (isLoading) return <p>Loading....</p>;
 
   return (
-    <>
-      <section className={postConfirmed ? "fadeIn" : "fadeOut"}>
-        <div className='alert alert-success'>
+    <main id='article'>
+      <article className='article__full-article'>
+        <div className={postConfirmed ? 'alert alert-success' : 'alert-disabled'}>
           <strong>Success! </strong>Thanks for your comment, {user}!
         </div>
+        <header className='article__card-header'>
+          <h2 className='article__h2'>{article.title}</h2>
+          <div className='article--metadata'>
+            <span className='author-metadata__article'>
+              by {article.author}
+              on {formatDate(article.created_at)}
+            </span>
+            <span className='topic--metadata__article'>{article.topic}</span>
+            <span className='comment-count--metadata__article'>
+              {article.comment_count} comments
+            </span>
+          </div>
+        </header>
+        <p>{article.body}</p>
+      </article>
+
+      <div className='vote-count'>
+        <button className='button__upVote' onClick={handleUpVote}>
+          <BiLike />
+        </button>
+        <span className='vote--counter'>{article.votes + voteCount}</span>
+        <button className='button__downVote' onClick={handleDownVote}>
+          <BiDislike />
+        </button>
+      </div>
+      <section className='form--add--comment'>
+        <fieldset>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor='body' className='label__comment--body'>
+              Join the conversation
+            </label>
+            <textarea
+              className='textarea__comment--body'
+              name='body'
+              placeholder='Type your thoughts here...'
+              onChange={handleChange}
+              cols='120'
+              rows='4'
+              required
+            ></textarea>
+            <button className='button__comment-submit'>Submit Comment</button>
+          </form>
+        </fieldset>
       </section>
-
-      <main id='article'>
-        <article className='article__full-article'>
-          <header className='article__card-header'>
-            <h2 className='article__h2'>{article.title}</h2>
-            <div className='article--metadata'>
-              <span className='author-metadata__article'>
-                by {article.author}
-                on {formatDate(article.created_at)}
-              </span>
-              <span className='topic--metadata__article'>{article.topic}</span>
-              <span className='comment-count--metadata__article'>
-                {article.comment_count} comments
-              </span>
-            </div>
-          </header>
-          <p>{article.body}</p>
-        </article>
-
-        <div className='vote-count'>
-          <button className='button__upVote' onClick={handleUpVote}>
-            <BiLike />
-          </button>
-          <span className='vote--counter'>{article.votes + voteCount}</span>
-          <button className='button__downVote' onClick={handleDownVote}>
-            <BiDislike />
-          </button>
-        </div>
-        <section className='form--add--comment'>
-          <fieldset>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor='body' className='label__comment--body'>
-                Join the conversation
-              </label>
-              <textarea
-                className='textarea__comment--body'
-                name='body'
-                placeholder='Type your thoughts here...'
-                onChange={handleChange}
-                cols='120'
-                rows='4'
-                required
-              ></textarea>
-              <button className='button__comment-submit'>Submit Comment</button>
-            </form>
-          </fieldset>
-        </section>
-        <CommentsList user={user}/>
-      </main>
-    </>
+      <CommentsList user={user} />
+    </main>
   );
 };
 
