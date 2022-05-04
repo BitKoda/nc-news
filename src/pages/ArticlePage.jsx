@@ -173,7 +173,7 @@ const ArticlePage = ({ user }) => {
             </form>
           </fieldset>
         </section>
-        <CommentsList />
+        <CommentsList user={user}/>
       </main>
     </>
   );

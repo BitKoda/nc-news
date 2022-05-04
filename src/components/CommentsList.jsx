@@ -10,7 +10,7 @@ import Footer from "../components/Footer.jsx";
 /// Utilities
 import * as api from "../utils/api.js";
 
-const CommentsList = () => {
+const CommentsList = ({user}) => {
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +61,7 @@ const CommentsList = () => {
               key={comment.comment_id}
               {...comment}
               onDelete={deleteComment}
+              user={user}
             />
           );
         })}

@@ -332,13 +332,17 @@ a .article__h2:hover {
   color: white;
   padding: 4px 8px;
   text-decoration: none;
-  margin: 5px 0px;
+  margin-top: 20px;
   cursor: pointer;
   font-weight: 900;
 }
 
 .button--delete-comment:hover {
   background-color: #f92c85;
+}
+
+.button--delete-comment-hidden {
+  display: none;
 }
 
 .form--add--comment {

@@ -8,6 +8,7 @@ const CommentCard = ({
   created_at,
   votes,
   onDelete,
+  user,
 }) => {
   return (
     <div className='article__comment' key={comment_id}>
@@ -21,10 +22,9 @@ const CommentCard = ({
         {body}
         <span className='comment--delete'>
           <button
-            className='button--delete-comment'
+            className={user === author ? 'button--delete-comment' : "button--delete-comment-hidden"}
             onClick={() => onDelete(comment_id)}
           >
-            {" "}
             Delete
           </button>
         </span>
