@@ -1,5 +1,6 @@
-/// Utilities
+// Utilities
 import formatDate from "../utils/formatDate";
+import { BiDislike, BiLike } from "react-icons/bi";
 
 const CommentCard = ({
   comment_id,
@@ -17,14 +18,27 @@ const CommentCard = ({
         &frasl;&frasl;
         <span className='comment--date'>{formatDate(created_at)}</span>
         &frasl;&frasl;
-        <span className='comment--votes'>{votes} votes</span>
+        <span className='article--metadata-votes'>
+          <button className='button__upVote'>
+            <BiLike />
+          </button>
+          <span className='votes'>{votes}</span>
+          <button className='button__downVote'>
+            <BiDislike />
+          </button>
+          votes
+        </span>
       </div>
 
       <div className='comment--body'>
         {body}
         <span className='comment--delete'>
           <button
-            className={user === author ? 'button--delete-comment' : "button--delete-comment-hidden"}
+            className={
+              user === author
+                ? "button--delete-comment"
+                : "button--delete-comment-hidden"
+            }
             onClick={() => onDelete(comment_id)}
           >
             Delete

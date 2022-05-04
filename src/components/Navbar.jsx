@@ -1,21 +1,29 @@
-import { Link, useSearchParams, useLocation, useNavigate } from "react-router-dom";
+// React & React Router
+import {
+  Link,
+  useSearchParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+// Utilities
 import { FaFilter } from "react-icons/fa";
-import { RiArrowGoBackFill } from "react-icons/ri"
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const Navbar = ({ slugs }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  const path = "/article/"
+  const path = "/article/";
   const navigate = useNavigate();
 
   if (location.pathname.includes(path)) {
-    return  (
+    return (
       <nav className='navbar'>
         <button className='back-btn' onClick={() => navigate("/articles")}>
-            <RiArrowGoBackFill /> Back
-          </button>
+          <RiArrowGoBackFill /> Back
+        </button>
       </nav>
-      )
+    );
   }
 
   return (

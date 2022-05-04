@@ -1,8 +1,13 @@
+// React & React Router
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+
+// Components
 import ArticlesListCard from "./ArticlesListCard";
 import Footer from "./Footer";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "../pages/ErrorPage";
+
+// Utilities
 import * as api from "../utils/api";
 
 const ArticlesList = () => {

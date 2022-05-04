@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
 // Components
-import ErrorPage from "../components/ErrorPage.jsx";
+import ErrorPage from "./ErrorPage";
 import CommentsList from "../components/CommentsList.jsx";
 
-/// Utilities
+// Utilities
 import { BiDislike, BiLike } from "react-icons/bi";
 import * as api from "../utils/api.js";
 import formatDate from "../utils/formatDate.js";
@@ -130,8 +130,10 @@ const ArticlePage = ({ user }) => {
           <h2 className='article__h2'>{article.title}</h2>
           <div className='article--metadata'>
             <span className='article--metadata-author'>
-              by {article.author}</span> &frasl;&frasl;
-            <span className="article--metadata-date">
+              by {article.author}
+            </span>{" "}
+            &frasl;&frasl;
+            <span className='article--metadata-date'>
               {formatDate(article.created_at)}
             </span>
             &frasl;&frasl;
@@ -143,23 +145,21 @@ const ArticlePage = ({ user }) => {
               {article.comment_count} comments
             </span>
             &frasl;&frasl;
-            <span className="article--metadata-comments">
-              {article.votes + voteCount} votes
+            <span className='article--metadata-votes'>
+              <button className='button__upVote' onClick={handleUpVote}>
+                <BiLike />
+              </button>
+              <span className='votes'>{article.votes + voteCount}</span>
+              <button className='button__downVote' onClick={handleDownVote}>
+                <BiDislike />
+              </button>
+              votes
             </span>
           </div>
         </header>
         <p>{article.body}</p>
       </article>
 
-      <div className='vote-count'>
-        <button className='button__upVote' onClick={handleUpVote}>
-          <BiLike />
-        </button>
-        <span className='vote--counter'>{article.votes + voteCount}</span>
-        <button className='button__downVote' onClick={handleDownVote}>
-          <BiDislike />
-        </button>
-      </div>
       <section className='form--add--comment'>
         <fieldset>
           <form onSubmit={handleSubmit}>

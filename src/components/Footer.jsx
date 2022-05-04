@@ -1,5 +1,13 @@
-import {BsFillSuitHeartFill} from "react-icons/bs"
-import { SiLinkedin, SiGithub, SiTwitter, SiPostgresql, SiReact, SiNodedotjs } from "react-icons/si"
+// Utilities
+import { BsFillSuitHeartFill } from "react-icons/bs";
+import {
+  SiLinkedin,
+  SiGithub,
+  SiTwitter,
+  SiPostgresql,
+  SiReact,
+  SiNodedotjs,
+} from "react-icons/si";
 
 const Footer = () => {
   return (
@@ -23,9 +31,11 @@ const Footer = () => {
       </div>
       <div className='footer-heading'>&copy; 2022 Northcoders</div>
       <div className='tech'>
-        <div className='footer-heading'>BUILT WITH <BsFillSuitHeartFill /> AND</div>
+        <div className='footer-heading'>
+          BUILT WITH <BsFillSuitHeartFill /> AND
+        </div>
         <ul className='footer-items'>
-        <li className='footer-link'>
+          <li className='footer-link'>
             <SiNodedotjs fontSize='1.5em' />
             <a href='https://nodejs.org'>Node v16.13.0</a>
           </li>

@@ -1,3 +1,4 @@
+// React & React Router
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -7,6 +8,8 @@ import Navbar from "./components/Navbar.jsx";
 import ArticlesList from "./components/ArticlesList.jsx";
 import ArticlePage from "./pages/ArticlePage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+
+// Utilities
 import * as api from "./utils/api";
 
 function App() {

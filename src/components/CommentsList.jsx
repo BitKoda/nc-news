@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // Components
-import ErrorPage from "../components/ErrorPage.jsx";
+import ErrorPage from "../pages/ErrorPage";
 import CommentCard from "../components/CommentCard";
 import Footer from "../components/Footer.jsx";
 
 /// Utilities
 import * as api from "../utils/api.js";
 
-const CommentsList = ({user}) => {
+const CommentsList = ({ user }) => {
   const { article_id } = useParams();
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
