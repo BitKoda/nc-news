@@ -11,7 +11,6 @@ This project forms one half of the Northcoders individual project - a news app, 
 - [Setup <a name="setup"></a>](#setup-)
   - [Cloning & Dependencies <a name="cloning-dependencies"></a>](#cloning--dependencies-)
   - [Available Scripts <a name="available-scripts"></a>](#available-scripts-)
-  - [Deployment <a name="deployment"></a>](#deployment-)
 - [Link To Hosted Application on Netlify <a name="hosted-app"></a>](#hosted-app-)
 
 ## General-Information <a name="general-information"></a>
@@ -81,50 +80,7 @@ Runs the app in the development mode, and makes the site available at [http://lo
 
 #### `npm run build`
 
-Builds the app for production to the `build` folder. See more information on deployment in the next section.
-
-### Deployment <a name="deployment"></a>
-
-This app can be deployed on Netlify by following the steps below:
-
-#### 1. Build the app
-
-Builds the app for production to the `build` folder. This script bundles React in production mode and optimizes the build for the best performance.
-
-```bash
-npm run build
-```
-#### 2. Create a Netlify account
-
-If you do not already have a Netlify account, [create one](https://app.netlify.com/signup).
-
-#### 3. Install the Netlify CLI
-
-```bash
-npm install netlify-cli -g
-```
-#### 4. Deploy
-
-First, deploy the app to a draft URL (to check it is working as expected):
-
-```bash
-netlify deploy
-```
-
-This step will require you to respond to a number of prompts via the command line CLI
-
-- Authorise Netlify to access your GitHub account.
-- Select `Create & configure a new site`.
-- Provide your choice of site name.
-- Select your personal account.
-- Provide a the build path: `./build` (if in the root of this react app).
-
-After checking the draft URL, contniue to deploy the production app:
-
-```bash
-netlify deploy --prod
-```
-- Provide the build path again: `./build` (if in the root of this react app).
+Builds the app for production to the `build` folder.
 
 ### Hosted App <a name="hosted-app"></a>
-The [original hosted version](https://newsfly.netlify.app) of this app, can be found on Netlify at this url: https://newsfly.netlify.app
+A hosted version of this app, can be found on Netlify at this url: https://newsfly.netlify.app
